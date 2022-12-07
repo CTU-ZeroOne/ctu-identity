@@ -15,12 +15,14 @@
 // You should have received a copy of the GNU General Public License
 // along with ctu-identity.  If not, see <http://www.gnu.org/licenses/>.
 
-const path = require("path");
+import PropTypes from "prop-types";
 
-module.exports = {
-	webpack: {
-		alias: {
-			"~": path.resolve(__dirname, "./src"),
-		},
-	},
+const DefaultLayout = ({ children }) => {
+	return <div>{children}</div>;
 };
+
+DefaultLayout.propTypes = {
+	children: PropTypes.node,
+};
+
+export default DefaultLayout;

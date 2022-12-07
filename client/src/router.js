@@ -15,12 +15,18 @@
 // You should have received a copy of the GNU General Public License
 // along with ctu-identity.  If not, see <http://www.gnu.org/licenses/>.
 
-const path = require("path");
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
-module.exports = {
-	webpack: {
-		alias: {
-			"~": path.resolve(__dirname, "./src"),
-		},
+const router = [
+	{
+		path: "/login",
+		component: Login,
 	},
-};
+	{
+		path: "/register",
+		component: Register,
+	},
+];
+
+export default router;
