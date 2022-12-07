@@ -16,8 +16,9 @@
 // along with ctu-identity.  If not, see <http://www.gnu.org/licenses/>.
 
 function App() {
-	return <div></div>;
+	return (
+		<div></div>
+	);
 }
 
 export default App;
-
