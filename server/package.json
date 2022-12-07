@@ -1,8 +1,7 @@
 {
 	"name": "server",
 	"version": "0.0.0",
-	"private": false,
-	"license": "GPL v3",
+	"private": true,
 	"scripts": {
 		"start": "node ./bin/www"
 	},
@@ -15,3 +14,4 @@
 		"morgan": "~1.9.1"
 	}
 }
+
