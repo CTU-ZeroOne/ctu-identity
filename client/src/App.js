@@ -15,8 +15,24 @@
 // You should have received a copy of the GNU General Public License
 // along with ctu-identity.  If not, see <http://www.gnu.org/licenses/>.
 
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { DefaultLayout } from "./layouts";
+import router from "./router";
+
 function App() {
-	return <div></div>;
+	return (
+		<Router>
+			<DefaultLayout>
+				<Routes>
+					{router.map((route) => {
+						const Component = route.component;
+
+						return <Route key={route.path} path={route.path} element={<Component />} />;
+					})}
+				</Routes>
+			</DefaultLayout>
+		</Router>
+	);
 }
 
 export default App;
