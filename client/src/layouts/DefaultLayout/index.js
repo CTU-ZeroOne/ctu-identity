@@ -16,9 +16,14 @@
 // along with ctu-identity.  If not, see <http://www.gnu.org/licenses/>.
 
 import React from "react";
+import PropTypes from "prop-types";
 
 const DefaultLayout = ({ children }) => {
-	return <div></div>;
+	return <div>{children}</div>;
+};
+
+DefaultLayout.propTypes = {
+	children: PropTypes.node,
 };
 
 export default DefaultLayout;
