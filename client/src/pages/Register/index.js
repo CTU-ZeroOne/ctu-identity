@@ -15,14 +15,8 @@
 // You should have received a copy of the GNU General Public License
 // along with ctu-identity.  If not, see <http://www.gnu.org/licenses/>.
 
-import PropTypes from "prop-types";
-
-const DefaultLayout = ({ children }) => {
-	return <div>{children}</div>;
+const Register = () => {
+	return <div>Register</div>;
 };
 
-DefaultLayout.propTypes = {
-	children: PropTypes.node,
-};
-
-export default DefaultLayout;
+export default Register;
