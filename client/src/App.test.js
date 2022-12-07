@@ -15,21 +15,11 @@
 // You should have received a copy of the GNU General Public License
 // along with ctu-identity.  If not, see <http://www.gnu.org/licenses/>.
 
-import {
-	render,
-	screen,
-} from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import App from "./App";
 
 test("renders learn react link", () => {
-	render(
-		<App />
-	);
-	const linkElement =
-		screen.getByText(
-			/learn react/i
-		);
-	expect(
-		linkElement
-	).toBeInTheDocument();
+	render(<App />);
+	const linkElement = screen.getByText(/learn react/i);
+	expect(linkElement).toBeInTheDocument();
 });

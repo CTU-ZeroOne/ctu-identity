@@ -15,8 +15,10 @@
 // You should have received a copy of the GNU General Public License
 // along with ctu-identity.  If not, see <http://www.gnu.org/licenses/>.
 
-function App() {
-	return <div></div>;
-}
+import React from "react";
 
-export default App;
+const DefaultLayout = ({ children }) => {
+	return <div></div>;
+};
+
+export default DefaultLayout;
