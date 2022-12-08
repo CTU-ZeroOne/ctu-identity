@@ -1,11 +1,7 @@
-var express = require("express");
-var router = express.Router();
+const indexRouter = require('./index.route')
+const usersRouter = require('./users.route')
 
-/* GET home page. */
-router.get("/", function (req, res, next) {
-	res.render("index", {
-		title: "Express",
-	});
-});
-
-module.exports = router;
+module.exports = (CTU) => {
+    CTU.use('/', indexRouter)
+    CTU.use('/api/users', usersRouter)
+}
