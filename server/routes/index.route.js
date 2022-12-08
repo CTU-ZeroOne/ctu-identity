@@ -17,14 +17,14 @@
  * along with CTU-Identity.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-const express = require("express");
-const router = express.Router();
+const express = require("express")
+const router = express.Router()
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
 	res.send({
 		message: "Hello World",
 	})
-});
+})
 
-module.exports = router;
+module.exports = router

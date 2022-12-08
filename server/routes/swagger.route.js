@@ -16,4 +16,16 @@
  * You should have received a copy of the GNU General Public License
  * along with CTU-Identity.  If not, see <http://www.gnu.org/licenses/>.
  */
+const express = require('express')
+const router = express.Router()
+const swaggerUi = require('swagger-ui-express')
+const YAML = require('yamljs')
+const swaggerDocument = YAML.load('./data/swagger.api.yaml')
 
+const options = {
+    explorer: true,
+}
+
+router.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options))
+
+module.exports = router

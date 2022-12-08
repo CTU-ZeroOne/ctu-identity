@@ -38,4 +38,4 @@ app.listen(SERVER_PORT, () => {
 
 })
 
-module.exports = app;
+module.exports = app
