@@ -16,9 +16,19 @@
 // along with ctu-identity.  If not, see <http://www.gnu.org/licenses/>.
 
 import PropTypes from "prop-types";
+import { Footer } from "tiny-ui/lib/layout/layout";
+
+import Header from "./components/Header";
+import styles from "./DefaultLayout.module.scss";
 
 const DefaultLayout = ({ children }) => {
-	return <div>{children}</div>;
+	return (
+		<div className={styles.wrapper}>
+			<Header />
+			<main className={styles.inner}>{children}</main>
+			<Footer />
+		</div>
+	);
 };
 
 DefaultLayout.propTypes = {

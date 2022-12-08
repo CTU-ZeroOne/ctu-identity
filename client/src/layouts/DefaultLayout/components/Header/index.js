@@ -15,23 +15,10 @@
 // You should have received a copy of the GNU General Public License
 // along with ctu-identity.  If not, see <http://www.gnu.org/licenses/>.
 
-import Home from "~/pages/Home";
-import Login from "~/pages/Login";
-import Register from "~/pages/Register";
+import styles from "./Header.module.scss";
 
-const router = [
-	{
-		path: "/",
-		component: Home,
-	},
-	{
-		path: "/login",
-		component: Login,
-	},
-	{
-		path: "/register",
-		component: Register,
-	},
-];
+const Header = () => {
+	return <header className={styles.wrapper}>Header</header>;
+};
 
-export default router;
+export default Header;
