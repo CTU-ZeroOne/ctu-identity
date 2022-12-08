@@ -10,7 +10,7 @@
 		"body-parser": "^1.20.1",
 		"debug": "~2.6.9",
 		"dotenv": "^16.0.3",
-		"express": "~4.16.1",
+		"express": "~4.17.3",
 		"keccak256": "^1.0.6",
 		"merkletreejs": "^0.3.9",
 		"morgan": "^1.10.0",
