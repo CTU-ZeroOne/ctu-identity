@@ -28,6 +28,8 @@ const Login = () => {
 	const fileId = useId();
 
 	const [file, setFile] = useState(null);
+	const [success, setSuccess] = useState(false);
+	const [failed, setFailed] = useState(false);
 
 	const handleLogin = async () => {
 		try {
@@ -38,8 +40,10 @@ const Login = () => {
 			const fileData = res.data;
 
 			console.log(fileData);
+
+			setSuccess(true);
 		} catch (error) {
-			console.log(error);
+			setFailed(true);
 		}
 	};
 
@@ -48,30 +52,37 @@ const Login = () => {
 			<Typography.Heading level={2} style={{ textAlign: "center" }}>
 				Đăng nhập
 			</Typography.Heading>
-			<div>
-				<label className={styles.fileWrapper} htmlFor={fileId}>
-					Tải khóa lên để đăng nhập
-				</label>
 
-				<input
-					type="file"
-					id={fileId}
-					onChange={(event) => setFile(event.target.files[0])}
-					style={{ display: "none" }}
-				/>
+			{success ? (
+				<Typography.Paragraph>Bạn đã đăng nhập thành công!</Typography.Paragraph>
+			) : (
+				<div>
+					<label className={styles.fileWrapper} htmlFor={fileId}>
+						Tải khóa lên để đăng nhập
+					</label>
 
-				{file && <Alert>Bạn đã tải lên 1 file</Alert>}
+					<input
+						type="file"
+						id={fileId}
+						onChange={(event) => setFile(event.target.files[0])}
+						style={{ display: "none" }}
+					/>
 
-				<Divider />
+					{file && <Alert>Bạn đã tải lên 1 file</Alert>}
 
-				<Button block btnType="primary" disabled={!file} onClick={handleLogin}>
-					Đăng nhập
-				</Button>
+					<Divider />
 
-				<Typography.Paragraph style={{ marginTop: 10 }}>
-					Chưa có tài khoản? <Link to="/register">Đăng ký ngay</Link>
-				</Typography.Paragraph>
-			</div>
+					<Button block btnType="primary" disabled={!file} onClick={handleLogin}>
+						Đăng nhập
+					</Button>
+
+					<Typography.Paragraph style={{ marginTop: 10 }}>
+						Chưa có tài khoản? <Link to="/register">Đăng ký ngay</Link>
+					</Typography.Paragraph>
+				</div>
+			)}
+
+			{failed && <Alert type="error"></Alert>}
 		</AuthLayout>
 	);
 };
