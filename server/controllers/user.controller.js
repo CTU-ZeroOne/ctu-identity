@@ -16,12 +16,13 @@
  * You should have received a copy of the GNU General Public License
  * along with CTU-Identity.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 const { createTree } = require("../functions/merkleTree");
 const { createKey } = require("../functions/keyFunction");
 const fs = require("fs");
 const { randomString } = require("../functions/string");
 const keccak256 = require("keccak256");
-
+const updateMerkleRoot = require("../contract");
 // create a empty tree
 dt = [];
 let dtTree = createTree(dt);
@@ -40,7 +41,7 @@ writeKey = (key, root) => {
 	return fileHash;
 };
 
-createUser = (req, res) => {
+createUser = async (req, res) => {
 	const { dataArray } = req;
 	let key = createKey();
 	let prefix = key.publicKey.toString("base64").slice(26).slice(40, 70);
@@ -49,6 +50,8 @@ createUser = (req, res) => {
 	dtTree.addLeaves(dataArray.map((x) => keccak256(prefix + x)));
 	const root = dtTree.getRoot().toString("hex");
 	console.log(typeof root);
+	console.log(root);
+	await updateMerkleRoot(root);
 	let fileHash = writeKey(key, root);
 	res.status(200).send({
 		keyUrl: "/key-data/" + fileHash + ".json",
