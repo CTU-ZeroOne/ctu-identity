@@ -17,12 +17,12 @@
  * along with CTU-Identity.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-const indexRouter = require('./index.route')
-const usersRouter = require('./users.route')
-const cityRouter = require('./city.route')
+const cityData = require('../data/city.data.json')
 
-module.exports = (CTU) => {
-    CTU.use('/', indexRouter)
-    CTU.use('/api/users', usersRouter)
-    CTU.use('/api/city', cityRouter)
+getAllCity = (req, res) => {
+    res.status(200).send(cityData)
+}
+
+module.exports = {
+    getAllCity,
 }
