@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2022 lvdat
+ * Copyright (C) 2022 Le Van Dat
  * 
  * This file is part of CTU-Identity.
  * 
@@ -17,11 +17,16 @@
  * along with CTU-Identity.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-const express = require("express")
-const router = express.Router()
-const { signUpCheck } = require("../middleware")
-const { createUser } = require("../controllers/user.controller")
+randomString = (length) => {
+    let result = ''
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+    const charactersLength = characters.length
+    for (let i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength))
+    }
+    return result
+}
 
-router.post('/', signUpCheck.checkAll, createUser)
-
-module.exports = router
+module.exports = {
+    randomString,
+}
