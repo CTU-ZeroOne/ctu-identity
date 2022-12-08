@@ -10,3 +10,4 @@ Chúng tôi fullstack trên Nodejs nên các bạn hãy cài Nodejs tại [đây
 
 -   [Client](./client/README.md)
 -   [Server](./server/README.md)
+-   [Smart Contract](./smart_contract/README.md)
