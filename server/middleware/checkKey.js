@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2022 lvdat
+ * Copyright (C) 2022 Le Van Dat
  * 
  * This file is part of CTU-Identity.
  * 
@@ -17,11 +17,20 @@
  * along with CTU-Identity.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-const express = require("express")
-const router = express.Router()
-const { signUpCheck } = require("../middleware")
-const { createUser } = require("../controllers/user.controller")
+const fs = require('fs')
 
-router.post('/', signUpCheck.checkAll, createUser)
-
-module.exports = router
+checkExist = (req, res, next)  => {
+    if (req.params.key) {
+        if (fs.existsSync(`./data/key/${req.params.key}.json`)) {
+            next()
+        } else {
+            res.status(400).send({
+                message: 'Key expired'
+            })
+        }
+    } else {
+        res.status(400).send({
+            message: 'Key is required'
+        })
+    }
+}

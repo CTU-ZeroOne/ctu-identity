@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2022 lvdat
+ * Copyright (C) 2022 Le Van Dat
  * 
  * This file is part of CTU-Identity.
  * 
@@ -17,11 +17,31 @@
  * along with CTU-Identity.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-const express = require("express")
-const router = express.Router()
-const { signUpCheck } = require("../middleware")
-const { createUser } = require("../controllers/user.controller")
+ checkFullFields = (body) => {
+    return body.cccd && body.name && body.birthday && body.sex && body.place
+}
 
-router.post('/', signUpCheck.checkAll, createUser)
+toArray = (body) => {
+    return (checkFullFields(body) ? [
+        body.cccd,
+        body.name,
+        body.birthday,
+        body.sex,
+        body.place,
+    ] : [])
+}
 
-module.exports = router
+checkAll = async (req, res, next) => {
+    if (toArray(req.body).length > 0) {
+        req.dataArray = toArray(req.body)
+        next()
+    } else {
+        return res.status(400).send({
+            message: "Missing require fields!"
+        })
+    }
+}
+
+module.exports = {
+    checkAll,
+}
