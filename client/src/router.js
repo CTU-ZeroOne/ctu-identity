@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU General Public License
 // along with ctu-identity.  If not, see <http://www.gnu.org/licenses/>.
 
-import Login from "./pages/Login";
-import Register from "./pages/Register";
+import Login from "~/pages/Login";
+import Register from "~/pages/Register";
 
 const router = [
 	{
