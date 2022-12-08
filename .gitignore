@@ -1,1 +1,4 @@
 .env
+smart_contract/.gitignore
+smart_contract/build/contracts/Identity.json
+smart_contract/build/contracts/MerkleProof.json
