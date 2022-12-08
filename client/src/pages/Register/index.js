@@ -17,6 +17,7 @@
 
 import { useFormik } from "formik";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { Badge, Button, Divider, Form, Input, NativeSelect, Typography } from "tiny-ui";
 
 import AuthLayout from "~/components/AuthLayout";
@@ -145,6 +146,10 @@ const Register = () => {
 			</form>
 
 			<RegisterScan visible={ocrVisible} onCancel={() => setOrcVisible(false)} />
+
+			<Typography.Paragraph style={{ marginTop: 10 }}>
+				Đã có tài khoản? <Link to="/login">Đăng nhập ngay</Link>
+			</Typography.Paragraph>
 		</AuthLayout>
 	);
 };

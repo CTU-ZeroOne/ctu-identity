@@ -17,9 +17,11 @@
 
 import { Typography } from "tiny-ui";
 
+import styles from "./Home.module.scss";
+
 const Home = () => {
 	return (
-		<div>
+		<div className={styles.wrapper}>
 			<Typography.Heading level={2}>
 				Welcome to <strong>CTU Identity</strong>
 			</Typography.Heading>
