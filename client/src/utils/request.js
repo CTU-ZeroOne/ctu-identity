@@ -15,32 +15,10 @@
 // You should have received a copy of the GNU General Public License
 // along with ctu-identity.  If not, see <http://www.gnu.org/licenses/>.
 
-import { Link } from "react-router-dom";
-import { Button, Divider, Input, Typography } from "tiny-ui";
+import axios from "axios";
 
-import AuthLayout from "~/components/AuthLayout";
+const request = axios.create({
+	baseURL: process.env.REACT_APP_BACKEND_ENDPOINT + "api/",
+});
 
-const Login = () => {
-	return (
-		<AuthLayout>
-			<Typography.Heading level={2} style={{ textAlign: "center" }}>
-				Đăng nhập
-			</Typography.Heading>
-			<form>
-				<Input type="file" placeholder="Tải khóa lên để đăng nhập" />
-
-				<Divider />
-
-				<Button block btnType="primary">
-					Đăng nhập
-				</Button>
-
-				<Typography.Paragraph style={{ marginTop: 10 }}>
-					Chưa có tài khoản? <Link to="/register">Đăng ký ngay</Link>
-				</Typography.Paragraph>
-			</form>
-		</AuthLayout>
-	);
-};
-
-export default Login;
+export default request;

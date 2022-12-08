@@ -14,3 +14,14 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with ctu-identity.  If not, see <http://www.gnu.org/licenses/>.
+
+.wrapper {
+	position: sticky;
+	bottom: 0;
+	background: #333;
+	color: #fff;
+	text-align: center;
+	padding: 30px 20px;
+	user-select: none;
+	margin-top: 100px;
+}

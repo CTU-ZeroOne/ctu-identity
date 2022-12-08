@@ -18,7 +18,9 @@
 import styles from "./Footer.module.scss";
 
 const Footer = () => {
-	return <footer className={styles.wrapper}>Footer</footer>;
+	return (
+		<footer className={styles.wrapper}>&copy; {new Date().getFullYear()} CTU Zero One</footer>
+	);
 };
 
 export default Footer;
