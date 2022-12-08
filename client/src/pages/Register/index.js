@@ -23,12 +23,14 @@ import { Badge, Button, Divider, Form, Input, NativeSelect, Typography } from "t
 import AuthLayout from "~/components/AuthLayout";
 import authService from "~/services/authService";
 import cityService from "~/services/cityService";
+import fileService from "~/services/fileService";
 
 import RegisterScan from "./RegisterScan";
 
 const Register = () => {
 	const [ocrVisible, setOrcVisible] = useState(false);
 	const [cities, setCities] = useState([]);
+	const [success, setSuccess] = useState(false);
 
 	const formik = useFormik({
 		initialValues: {
@@ -43,8 +45,14 @@ const Register = () => {
 			try {
 				const res = await authService.register(values);
 
-				console.log(res.data);
-			} catch (error) {}
+				const key = res.data.keyUrl.split(/[./]/)[2];
+
+				fileService.downloadFileByKey(key);
+
+				setSuccess(true);
+			} catch (error) {
+			} finally {
+			}
 		},
 	});
 
@@ -71,86 +79,99 @@ const Register = () => {
 				Đăng ký
 			</Typography.Heading>
 
-			<form onSubmit={formik.handleSubmit}>
-				<Divider>Nhập thông tin</Divider>
-				<Form.Item label="Số CCCD" required>
-					<Input
-						placeholder="Số CCCD"
-						name="cccd"
-						required
-						maxLength={12}
-						minLength={12}
-						onInput={formik.handleChange}
-					/>
-				</Form.Item>
+			{success ? (
+				<>
+					<Typography.Paragraph>Bạn đã tạo tài khoản thành công!</Typography.Paragraph>
+				</>
+			) : (
+				<>
+					<form onSubmit={formik.handleSubmit}>
+						<Divider>Nhập thông tin</Divider>
+						<Form.Item label="Số CCCD" required>
+							<Input
+								placeholder="Số CCCD"
+								name="cccd"
+								required
+								maxLength={12}
+								minLength={12}
+								onInput={formik.handleChange}
+							/>
+						</Form.Item>
 
-				<Form.Item label="Họ tên" required>
-					<Input
-						placeholder="Họ tên"
-						name="name"
-						required
-						onInput={formik.handleChange}
-					/>
-				</Form.Item>
+						<Form.Item label="Họ tên" required>
+							<Input
+								placeholder="Họ tên"
+								name="name"
+								required
+								onInput={formik.handleChange}
+							/>
+						</Form.Item>
 
-				<Form.Item label="Ngày sinh" required>
-					<Input
-						placeholder="Ngày sinh"
-						name="birthday"
-						type="date"
-						required
-						onInput={formik.handleChange}
-					/>
-				</Form.Item>
+						<Form.Item label="Ngày sinh" required>
+							<Input
+								placeholder="Ngày sinh"
+								name="birthday"
+								type="date"
+								required
+								onInput={formik.handleChange}
+							/>
+						</Form.Item>
 
-				<Form.Item label="Giới tính" required>
-					<NativeSelect
-						name="sex"
-						placeholder="Giới tính"
-						onInput={formik.handleChange}
-						required
-					>
-						<NativeSelect.Option value={1}>Nam</NativeSelect.Option>
-						<NativeSelect.Option value={2}>Nữ</NativeSelect.Option>
-					</NativeSelect>
-				</Form.Item>
+						<Form.Item label="Giới tính" required>
+							<NativeSelect
+								name="sex"
+								placeholder="Giới tính"
+								onInput={formik.handleChange}
+								required
+							>
+								<NativeSelect.Option value={1}>Nam</NativeSelect.Option>
+								<NativeSelect.Option value={2}>Nữ</NativeSelect.Option>
+							</NativeSelect>
+						</Form.Item>
 
-				<Form.Item label="Quê quán" required>
-					<NativeSelect
-						disabled={!cities.length}
-						name="place"
-						placeholder="Quê quán"
-						required
-						onInput={formik.handleChange}
-					>
-						{cities.map((city) => (
-							<NativeSelect.Option key={city.code} value={city.code}>
-								{city.code} - {city.name_with_type}
-							</NativeSelect.Option>
-						))}
-					</NativeSelect>
-				</Form.Item>
+						<Form.Item label="Quê quán" required>
+							<NativeSelect
+								disabled={!cities.length}
+								name="place"
+								placeholder="Quê quán"
+								required
+								onInput={formik.handleChange}
+							>
+								{cities.map((city) => (
+									<NativeSelect.Option key={city.code} value={city.code}>
+										{city.code} - {city.name_with_type}
+									</NativeSelect.Option>
+								))}
+							</NativeSelect>
+						</Form.Item>
 
-				<Divider>Hoặc</Divider>
+						<Divider>Hoặc</Divider>
 
-				<Badge style={{ width: "100%" }} count="Đang phát triển">
-					<Button disabled block btnType="outline" onClick={() => setOrcVisible(true)}>
-						Tải ảnh căn cước công dân
-					</Button>
-				</Badge>
+						<Badge style={{ width: "100%" }} count="Đang phát triển">
+							<Button
+								disabled
+								block
+								btnType="outline"
+								onClick={() => setOrcVisible(true)}
+							>
+								Tải ảnh căn cước công dân
+							</Button>
+						</Badge>
 
-				<Divider />
+						<Divider />
 
-				<Button btnType="primary" block type="submit">
-					Đăng ký
-				</Button>
-			</form>
+						<Button btnType="primary" block type="submit">
+							Đăng ký
+						</Button>
+					</form>
 
-			<RegisterScan visible={ocrVisible} onCancel={() => setOrcVisible(false)} />
+					<RegisterScan visible={ocrVisible} onCancel={() => setOrcVisible(false)} />
 
-			<Typography.Paragraph style={{ marginTop: 10 }}>
-				Đã có tài khoản? <Link to="/login">Đăng nhập ngay</Link>
-			</Typography.Paragraph>
+					<Typography.Paragraph style={{ marginTop: 10 }}>
+						Đã có tài khoản? <Link to="/login">Đăng nhập ngay</Link>
+					</Typography.Paragraph>
+				</>
+			)}
 		</AuthLayout>
 	);
 };

@@ -15,9 +15,10 @@
 // You should have received a copy of the GNU General Public License
 // along with ctu-identity.  If not, see <http://www.gnu.org/licenses/>.
 
-import { useId } from "react";
+import axios from "axios";
+import { useId, useState } from "react";
 import { Link } from "react-router-dom";
-import { Button, Divider, Typography } from "tiny-ui";
+import { Alert, Button, Divider, Typography } from "tiny-ui";
 
 import AuthLayout from "~/components/AuthLayout";
 
@@ -26,28 +27,51 @@ import styles from "./Login.module.scss";
 const Login = () => {
 	const fileId = useId();
 
+	const [file, setFile] = useState(null);
+
+	const handleLogin = async () => {
+		try {
+			const fileUrl = URL.createObjectURL(file);
+
+			const res = await axios.get(fileUrl);
+
+			const fileData = res.data;
+
+			console.log(fileData);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
 	return (
 		<AuthLayout>
 			<Typography.Heading level={2} style={{ textAlign: "center" }}>
 				Đăng nhập
 			</Typography.Heading>
-			<form>
+			<div>
 				<label className={styles.fileWrapper} htmlFor={fileId}>
 					Tải khóa lên để đăng nhập
 				</label>
 
-				<input type="file" id={fileId} style={{ display: "none" }} />
+				<input
+					type="file"
+					id={fileId}
+					onChange={(event) => setFile(event.target.files[0])}
+					style={{ display: "none" }}
+				/>
+
+				{file && <Alert>Bạn đã tải lên 1 file</Alert>}
 
 				<Divider />
 
-				<Button block btnType="primary">
+				<Button block btnType="primary" disabled={!file} onClick={handleLogin}>
 					Đăng nhập
 				</Button>
 
 				<Typography.Paragraph style={{ marginTop: 10 }}>
 					Chưa có tài khoản? <Link to="/register">Đăng ký ngay</Link>
 				</Typography.Paragraph>
-			</form>
+			</div>
 		</AuthLayout>
 	);
 };

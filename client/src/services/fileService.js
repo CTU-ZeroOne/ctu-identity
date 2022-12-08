@@ -15,17 +15,23 @@
 // You should have received a copy of the GNU General Public License
 // along with ctu-identity.  If not, see <http://www.gnu.org/licenses/>.
 
-.wrapper {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 100%;
-	padding: 20px;
-}
+import axios from "axios";
 
-.inner {
-	width: 400px;
-	border: 1px solid #ddd;
-	padding: 10px 40px;
-	box-shadow: 0 10px 20px #00000010;
-}
+const fileService = {
+	async downloadFileByKey(key) {
+		try {
+			const res = await axios.get(
+				`${process.env.REACT_APP_BACKEND_ENDPOINT}key-download/${key}`
+			);
+
+			const jsonString = JSON.stringify(res.data, undefined, 2);
+			const blob = new Blob([jsonString], { type: "text/plain" });
+			const link = document.createElement("a");
+			link.download = "key.json";
+			link.href = URL.createObjectURL(blob);
+			link.click();
+		} catch (error) {}
+	},
+};
+
+export default fileService;
