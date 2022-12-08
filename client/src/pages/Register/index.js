@@ -36,16 +36,14 @@ const Register = () => {
 			name: "",
 			birthday: "",
 			sex: 1,
-			place_origin: 1,
-			place_residence: 1,
-			date: "",
+			place: 1,
 		},
 
 		onSubmit: async (values) => {
 			try {
 				const res = await authService.register(values);
 
-				console.log(res.data);
+				window.open(process.env.REACT_APP_BACKEND_ENDPOINT + "." + res.data.keyUrl);
 			} catch (error) {}
 		},
 	});
@@ -120,7 +118,7 @@ const Register = () => {
 				<Form.Item label="Quê quán" required>
 					<NativeSelect
 						disabled={!cities.length}
-						name="place_origin"
+						name="place"
 						placeholder="Quê quán"
 						required
 						onInput={formik.handleChange}
