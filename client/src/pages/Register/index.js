@@ -36,9 +36,7 @@ const Register = () => {
 			name: "",
 			birthday: "",
 			sex: 1,
-			place_origin: 1,
-			place_residence: 1,
-			date: "",
+			place: 1,
 		},
 
 		onSubmit: async (values) => {
@@ -120,7 +118,7 @@ const Register = () => {
 				<Form.Item label="Quê quán" required>
 					<NativeSelect
 						disabled={!cities.length}
-						name="place_origin"
+						name="place"
 						placeholder="Quê quán"
 						required
 						onInput={formik.handleChange}
