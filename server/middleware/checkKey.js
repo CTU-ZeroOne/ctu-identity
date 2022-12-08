@@ -22,15 +22,20 @@ const fs = require('fs')
 checkExist = (req, res, next)  => {
     if (req.params.key) {
         if (fs.existsSync(`./data/key/${req.params.key}.json`)) {
+            req.key = req.params.key
             next()
         } else {
-            res.status(400).send({
+            return res.status(400).send({
                 message: 'Key expired'
             })
         }
     } else {
-        res.status(400).send({
+        return res.status(400).send({
             message: 'Key is required'
         })
     }
+}
+
+module.exports = {
+    checkExist,
 }

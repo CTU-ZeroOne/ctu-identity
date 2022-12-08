@@ -3,8 +3,8 @@
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
-		"start": "node app dotenv_config_path=.env",
-		"dev": "nodemon app dotenv_config_path=.env"
+		"start": "node app",
+		"dev": "nodemon app"
 	},
 	"dependencies": {
 		"body-parser": "^1.20.1",

@@ -17,3 +17,25 @@
  * along with CTU-Identity.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+download = async (req, res) => {
+    try {
+        const key = req.key
+        res.download(`./data/key/${key}.json`, 'key.json', (err) => {
+            if(err) {
+                return res.status(400).send({
+                    message: 'Download failed',
+                    err
+                })
+            }
+        })
+    } catch (err) {
+        return res.status(500).send({
+            message: 'internal server error',
+            err
+        })
+    }
+}
+
+module.exports = {
+    download,
+}

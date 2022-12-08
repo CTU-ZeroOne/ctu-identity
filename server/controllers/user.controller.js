@@ -54,7 +54,7 @@ createUser = async (req, res) => {
 	await updateMerkleRoot(root);
 	let fileHash = writeKey(key, root);
 	res.status(200).send({
-		keyUrl: "/key-data/" + fileHash + ".json",
+		keyUrl: "/key-download/" + fileHash,
 	});
 };
 

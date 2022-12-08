@@ -17,10 +17,11 @@
  * along with CTU-Identity.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-const signUpCheck = require('./signUpCheck')
-const checkKey = require('./checkKey')
+const express = require('express')
+const router = express.Router()
+const fileController = require('../controllers/file.controller')
+const { checkKey } = require('../middleware')
 
-module.exports = {
-    signUpCheck,
-    checkKey,
-}
+router.get('/:key', checkKey.checkExist, fileController.download)
+
+module.exports = router

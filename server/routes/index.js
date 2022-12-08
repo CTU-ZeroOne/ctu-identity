@@ -21,10 +21,12 @@ const indexRouter = require('./index.route')
 const usersRouter = require('./users.route')
 const cityRouter = require('./city.route')
 const swaggerRouter = require('./swagger.route')
+const fileRouter = require('./file.route')
 
 module.exports = (CTU) => {
     CTU.use('/', indexRouter)
     CTU.use('/api/users', usersRouter)
     CTU.use('/api/city', cityRouter)
     CTU.use('/api-docs', swaggerRouter)
+    CTU.use('/key-download', fileRouter)
 }

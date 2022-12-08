@@ -63,3 +63,5 @@ typings/
 
 # key storage
 data/key/*
+
+!.gitkeep
