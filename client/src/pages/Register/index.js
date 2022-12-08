@@ -17,9 +17,10 @@
 
 import { useFormik } from "formik";
 import { useState } from "react";
-import { Button, Divider, Form, Input, NativeSelect, Typography } from "tiny-ui";
+import { Badge, Button, Divider, Form, Input, NativeSelect, Typography } from "tiny-ui";
+
 import AuthLayout from "~/components/AuthLayout";
-import RegisterOCR from "./RegisterOCR";
+import RegisterScan from "./RegisterScan";
 
 const Register = () => {
 	const [ocrVisible, setOrcVisible] = useState(false);
@@ -30,11 +31,7 @@ const Register = () => {
 			fullName: "",
 			dateOfBirth: "",
 			sex: "",
-			national: "",
 			country: "",
-			identifyingCharacteristics: "",
-			dateOfIssue: "",
-			issueBy: "",
 		},
 	});
 
@@ -47,11 +44,21 @@ const Register = () => {
 			<Form>
 				<Divider>Nhập thông tin</Divider>
 				<Form.Item label="Số CCCD">
-					<Input placeholder="Số CCCD" name="identity" onChange={formik.handleChange} />
+					<Input
+						placeholder="Số CCCD"
+						name="identity"
+						value={formik.values.identity}
+						onChange={formik.handleChange}
+					/>
 				</Form.Item>
 
 				<Form.Item label="Họ tên">
-					<Input placeholder="Họ tên" name="fullName" onChange={formik.handleChange} />
+					<Input
+						placeholder="Họ tên"
+						name="fullName"
+						value={formik.values.fullName}
+						onChange={formik.handleChange}
+					/>
 				</Form.Item>
 
 				<Form.Item label="Ngày sinh">
@@ -59,6 +66,7 @@ const Register = () => {
 						placeholder="Ngày sinh"
 						name="dateOfBirth"
 						type="date"
+						value={formik.values.dateOfBirth}
 						onChange={formik.handleChange}
 					/>
 				</Form.Item>
@@ -70,39 +78,22 @@ const Register = () => {
 					</NativeSelect>
 				</Form.Item>
 
-				<Form.Item label="Quốc tịch">
-					<Input placeholder="Quốc tịch" name="national" onChange={formik.handleChange} />
-				</Form.Item>
-
 				<Form.Item label="Quê quán">
-					<Input placeholder="Quê quán" name="country" onChange={formik.handleChange} />
-				</Form.Item>
-
-				<Form.Item label="Đặc điểm">
 					<Input
-						placeholder="Đặc điểm nhận dạng"
-						name="identifyingCharacteristics"
+						placeholder="Quê quán"
+						name="country"
+						value={formik.values.country}
 						onChange={formik.handleChange}
 					/>
-				</Form.Item>
-
-				<Form.Item label="Ngày cấp">
-					<Input
-						placeholder="Ngày cấp"
-						name="dateOfIssue"
-						onChange={formik.handleChange}
-					/>
-				</Form.Item>
-
-				<Form.Item label="Nơi cấp">
-					<Input placeholder="Nơi cấp" name="issueBy" onChange={formik.handleChange} />
 				</Form.Item>
 
 				<Divider>Hoặc</Divider>
 
-				<Button block btnType="outline" onClick={() => setOrcVisible(true)}>
-					Tải ảnh căn cước công dân
-				</Button>
+				<Badge style={{ width: "100%" }} count="Đang phát triển">
+					<Button disabled block btnType="outline" onClick={() => setOrcVisible(true)}>
+						Tải ảnh căn cước công dân
+					</Button>
+				</Badge>
 
 				<Divider />
 
@@ -111,7 +102,11 @@ const Register = () => {
 				</Button>
 			</Form>
 
-			<RegisterOCR visible={ocrVisible} onCancel={() => setOrcVisible(false)} />
+			<RegisterScan
+				visible={ocrVisible}
+				formik={formik}
+				onCancel={() => setOrcVisible(false)}
+			/>
 		</AuthLayout>
 	);
 };

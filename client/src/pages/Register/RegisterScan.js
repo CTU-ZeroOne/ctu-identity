@@ -16,17 +16,26 @@
 // along with ctu-identity.  If not, see <http://www.gnu.org/licenses/>.
 
 import PropTypes from "prop-types";
-import { useEffect, useState } from "react";
-import { Input, Modal, Typography } from "tiny-ui";
+import QrScanner from "qr-scanner";
+import { useEffect, useRef, useState } from "react";
+import { Divider, Input, Modal } from "tiny-ui";
 
-const RegisterOCR = ({ visible, onCancel, onSuccess }) => {
+const RegisterScan = ({ visible, onCancel, onSuccess }) => {
 	const [frontFile, setFrontFile] = useState(null);
-	const [backFile, setBackFile] = useState(null);
+
+	const dataRef = useRef({});
 
 	useEffect(() => {
-		setBackFile(null);
-		setFrontFile(null);
-	}, [visible]);
+		if (frontFile) {
+			QrScanner.scanImage(frontFile, { returnDetailedScanResult: true })
+				.then((data) => {
+					console.log(data);
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+		}
+	}, [frontFile]);
 
 	return (
 		<Modal
@@ -37,8 +46,6 @@ const RegisterOCR = ({ visible, onCancel, onSuccess }) => {
 			style={{ overflow: "auto" }}
 			onCancel={onCancel}
 		>
-			<Typography.Heading level={3}>Mặt trước</Typography.Heading>
-
 			<Input
 				type="file"
 				accept="image/*"
@@ -50,30 +57,17 @@ const RegisterOCR = ({ visible, onCancel, onSuccess }) => {
 				}}
 			/>
 
+			<Divider />
+
 			{frontFile && <img src={frontFile} alt="Mặt trước" width="100%" />}
-
-			<Typography.Heading level={3}>Mặt sau</Typography.Heading>
-
-			<Input
-				type="file"
-				accept="image/*"
-				onChange={(event) => {
-					if (event.target.files[0]) {
-						URL.revokeObjectURL(backFile);
-
-						setBackFile(URL.createObjectURL(event.target.files[0]));
-					}
-				}}
-			/>
-
-			{backFile && <img src={backFile} alt="Mặt trước" width="100%" />}
 		</Modal>
 	);
 };
 
-RegisterOCR.propTypes = {
+RegisterScan.propTypes = {
 	visible: PropTypes.bool,
 	onCancel: PropTypes.func,
+	onSuccess: PropTypes.func,
 };
 
-export default RegisterOCR;
+export default RegisterScan;
