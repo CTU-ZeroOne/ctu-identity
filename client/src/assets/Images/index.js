@@ -15,29 +15,8 @@
 // You should have received a copy of the GNU General Public License
 // along with ctu-identity.  If not, see <http://www.gnu.org/licenses/>.
 
-import { Link } from "react-router-dom";
-import { Button } from "tiny-ui";
-
-import { Logo } from "~/components";
-
-import styles from "./Header.module.scss";
-
-const Header = () => {
-	return (
-		<header className={styles.wrapper}>
-			<Logo />
-
-			<nav>
-				<Link to="/login">
-					<Button btnType="ghost">Đăng nhập</Button>
-				</Link>
-
-				<Link to="/register">
-					<Button btnType="primary">Đăng ký</Button>
-				</Link>
-			</nav>
-		</header>
-	);
+const Images = {
+	zeroOne: require("./zero-one.png"),
 };
 
-export default Header;
+export default Images;
