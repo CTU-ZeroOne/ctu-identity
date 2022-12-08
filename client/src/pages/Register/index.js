@@ -16,10 +16,14 @@
 // along with ctu-identity.  If not, see <http://www.gnu.org/licenses/>.
 
 import { useFormik } from "formik";
+import { useState } from "react";
 import { Button, Divider, Form, Input, NativeSelect, Typography } from "tiny-ui";
 import AuthLayout from "~/components/AuthLayout";
+import RegisterOCR from "./RegisterOCR";
 
 const Register = () => {
+	const [ocrVisible, setOrcVisible] = useState(false);
+
 	const formik = useFormik({
 		initialValues: {
 			identity: "",
@@ -96,7 +100,7 @@ const Register = () => {
 
 				<Divider>Hoặc</Divider>
 
-				<Button block btnType="outline">
+				<Button block btnType="outline" onClick={() => setOrcVisible(true)}>
 					Tải ảnh căn cước công dân
 				</Button>
 
@@ -106,6 +110,8 @@ const Register = () => {
 					Đăng ký
 				</Button>
 			</Form>
+
+			<RegisterOCR visible={ocrVisible} onCancel={() => setOrcVisible(false)} />
 		</AuthLayout>
 	);
 };

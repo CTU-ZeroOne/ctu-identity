@@ -13,6 +13,7 @@
 		"react-router-dom": "^6.4.4",
 		"react-scripts": "5.0.1",
 		"sass": "^1.56.1",
+		"tesseract.js": "^4.0.0",
 		"tiny-ui": "^0.0.95",
 		"web-vitals": "^2.1.4"
 	},
