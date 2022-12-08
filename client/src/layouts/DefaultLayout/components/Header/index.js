@@ -25,7 +25,9 @@ import styles from "./Header.module.scss";
 const Header = () => {
 	return (
 		<header className={styles.wrapper}>
-			<Logo />
+			<Link to="/">
+				<Logo />
+			</Link>
 
 			<nav>
 				<Link to="/login">
