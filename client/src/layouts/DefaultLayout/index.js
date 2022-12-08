@@ -16,7 +16,7 @@
 // along with ctu-identity.  If not, see <http://www.gnu.org/licenses/>.
 
 import PropTypes from "prop-types";
-import { Footer } from "tiny-ui/lib/layout/layout";
+import Footer from "./components/Footer";
 
 import Header from "./components/Header";
 import styles from "./DefaultLayout.module.scss";
