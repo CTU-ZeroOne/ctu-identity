@@ -1,6 +1,6 @@
 {
-	"name": "server",
-	"version": "0.0.0",
+	"name": "ctu-identity-server",
+	"version": "0.0.1",
 	"private": true,
 	"scripts": {
 		"start": "node app dotenv_config_path=.env",
