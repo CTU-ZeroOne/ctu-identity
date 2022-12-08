@@ -15,23 +15,12 @@
 // You should have received a copy of the GNU General Public License
 // along with ctu-identity.  If not, see <http://www.gnu.org/licenses/>.
 
-import Home from "~/pages/Home";
-import Login from "~/pages/Login";
-import Register from "~/pages/Register";
+import styles from "./Footer.module.scss";
 
-const router = [
-	{
-		path: "/",
-		component: Home,
-	},
-	{
-		path: "/login",
-		component: Login,
-	},
-	{
-		path: "/register",
-		component: Register,
-	},
-];
+const Footer = () => {
+	return (
+		<footer className={styles.wrapper}>&copy; {new Date().getFullYear()} CTU Zero One</footer>
+	);
+};
 
-export default router;
+export default Footer;

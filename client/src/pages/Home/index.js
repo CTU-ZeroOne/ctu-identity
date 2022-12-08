@@ -15,23 +15,18 @@
 // You should have received a copy of the GNU General Public License
 // along with ctu-identity.  If not, see <http://www.gnu.org/licenses/>.
 
-import Home from "~/pages/Home";
-import Login from "~/pages/Login";
-import Register from "~/pages/Register";
+import { Typography } from "tiny-ui";
 
-const router = [
-	{
-		path: "/",
-		component: Home,
-	},
-	{
-		path: "/login",
-		component: Login,
-	},
-	{
-		path: "/register",
-		component: Register,
-	},
-];
+import styles from "./Home.module.scss";
 
-export default router;
+const Home = () => {
+	return (
+		<div className={styles.wrapper}>
+			<Typography.Heading level={2}>
+				Welcome to <strong>CTU Identity</strong>
+			</Typography.Heading>
+		</div>
+	);
+};
+
+export default Home;

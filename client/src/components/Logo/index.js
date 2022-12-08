@@ -15,23 +15,12 @@
 // You should have received a copy of the GNU General Public License
 // along with ctu-identity.  If not, see <http://www.gnu.org/licenses/>.
 
-import Home from "~/pages/Home";
-import Login from "~/pages/Login";
-import Register from "~/pages/Register";
+import { Images } from "~/assets";
 
-const router = [
-	{
-		path: "/",
-		component: Home,
-	},
-	{
-		path: "/login",
-		component: Login,
-	},
-	{
-		path: "/register",
-		component: Register,
-	},
-];
+import styles from "./Logo.module.scss";
 
-export default router;
+const Logo = () => {
+	return <img className={styles.wrapper} src={Images.zeroOne} alt="CTU Zero One Logo" />;
+};
+
+export default Logo;

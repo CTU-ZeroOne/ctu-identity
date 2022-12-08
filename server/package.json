@@ -16,6 +16,7 @@
 		"merkletreejs": "^0.3.9",
 		"morgan": "^1.10.0",
 		"swagger-ui-express": "^4.6.0",
+		"web3": "^1.8.1",
 		"yamljs": "^0.3.0"
 	},
 	"devDependencies": {

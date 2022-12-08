@@ -15,23 +15,31 @@
 // You should have received a copy of the GNU General Public License
 // along with ctu-identity.  If not, see <http://www.gnu.org/licenses/>.
 
-import Home from "~/pages/Home";
-import Login from "~/pages/Login";
-import Register from "~/pages/Register";
+import { Link } from "react-router-dom";
+import { Button } from "tiny-ui";
 
-const router = [
-	{
-		path: "/",
-		component: Home,
-	},
-	{
-		path: "/login",
-		component: Login,
-	},
-	{
-		path: "/register",
-		component: Register,
-	},
-];
+import { Logo } from "~/components";
 
-export default router;
+import styles from "./Header.module.scss";
+
+const Header = () => {
+	return (
+		<header className={styles.wrapper}>
+			<Link to="/">
+				<Logo />
+			</Link>
+
+			<nav>
+				<Link to="/login">
+					<Button btnType="ghost">Đăng nhập</Button>
+				</Link>
+
+				<Link to="/register">
+					<Button btnType="primary">Đăng ký</Button>
+				</Link>
+			</nav>
+		</header>
+	);
+};
+
+export default Header;

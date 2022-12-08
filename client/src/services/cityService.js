@@ -15,23 +15,14 @@
 // You should have received a copy of the GNU General Public License
 // along with ctu-identity.  If not, see <http://www.gnu.org/licenses/>.
 
-import Home from "~/pages/Home";
-import Login from "~/pages/Login";
-import Register from "~/pages/Register";
+import request from "~/utils/request";
 
-const router = [
-	{
-		path: "/",
-		component: Home,
-	},
-	{
-		path: "/login",
-		component: Login,
-	},
-	{
-		path: "/register",
-		component: Register,
-	},
-];
+const cityService = {
+	async getAllCities() {
+		const res = await request.get("/city");
 
-export default router;
+		return res;
+	},
+};
+
+export default cityService;
