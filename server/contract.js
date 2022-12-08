@@ -2,10 +2,10 @@ require("dotenv").config();
 const Web3 = require("web3");
 
 const CONTRACT_ABI = require("./abi/Identity.json");
-const CONTRACT_ADDRESS = "0x8dcca97baC4936Cf07D51239f1D9d1f31cAe87c7";
+const CONTRACT_ADDRESS = process.env.CONTRACT_ADDRESS;
 
-const INFURA_PROVIDER = "wss://goerli.infura.io/ws/v3/30b1215d74e5417b8c75c905286556cd";
-const GANACHE_PROVIDER = "http://127.0.0.1:7545";
+const INFURA_PROVIDER = process.env.INFURA_PROVIDER;
+const GANACHE_PROVIDER = process.env.GANACHE_PROVIDER;
 
 const web3 = new Web3(new Web3.providers.WebsocketProvider(GANACHE_PROVIDER));
 
