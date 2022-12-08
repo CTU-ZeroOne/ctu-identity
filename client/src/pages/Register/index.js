@@ -21,6 +21,7 @@ import { Link } from "react-router-dom";
 import { Badge, Button, Divider, Form, Input, NativeSelect, Typography } from "tiny-ui";
 
 import AuthLayout from "~/components/AuthLayout";
+import authService from "~/services/authService";
 import cityService from "~/services/cityService";
 
 import RegisterScan from "./RegisterScan";
@@ -42,7 +43,9 @@ const Register = () => {
 
 		onSubmit: async (values) => {
 			try {
-				console.log(values);
+				const res = await authService.register(values);
+
+				console.log(res.data);
 			} catch (error) {}
 		},
 	});
