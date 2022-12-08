@@ -16,6 +16,7 @@
 // along with ctu-identity.  If not, see <http://www.gnu.org/licenses/>.
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import "tiny-ui/dist/styles/index.css";
 
 import { DefaultLayout } from "~/layouts";
 import router from "~/router";

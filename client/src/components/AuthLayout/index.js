@@ -15,23 +15,20 @@
 // You should have received a copy of the GNU General Public License
 // along with ctu-identity.  If not, see <http://www.gnu.org/licenses/>.
 
-import Home from "~/pages/Home";
-import Login from "~/pages/Login";
-import Register from "~/pages/Register";
+import PropTypes from "prop-types";
 
-const router = [
-	{
-		path: "/",
-		component: Home,
-	},
-	{
-		path: "/login",
-		component: Login,
-	},
-	{
-		path: "/register",
-		component: Register,
-	},
-];
+import styles from "./AuthLayout.module.scss";
 
-export default router;
+const AuthLayout = ({ children }) => {
+	return (
+		<div className={styles.wrapper}>
+			<div className={styles.inner}>{children}</div>
+		</div>
+	);
+};
+
+AuthLayout.propTypes = {
+	children: PropTypes.node,
+};
+
+export default AuthLayout;

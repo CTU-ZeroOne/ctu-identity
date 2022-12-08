@@ -15,23 +15,4 @@
 // You should have received a copy of the GNU General Public License
 // along with ctu-identity.  If not, see <http://www.gnu.org/licenses/>.
 
-import Home from "~/pages/Home";
-import Login from "~/pages/Login";
-import Register from "~/pages/Register";
-
-const router = [
-	{
-		path: "/",
-		component: Home,
-	},
-	{
-		path: "/login",
-		component: Login,
-	},
-	{
-		path: "/register",
-		component: Register,
-	},
-];
-
-export default router;
+export { default as Images } from "./Images";
