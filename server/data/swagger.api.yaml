@@ -1,0 +1,152 @@
+openapi: 3.0.3
+info:
+  title: CIC Identity - OpenAPI 3.0
+  description: |-
+    The Citizen Identity Card Identity with Zero-Knowledge
+  license:
+    name: GPLv3
+    url: https://www.gnu.org/licenses/gpl-3.0.html
+  version: 0.0.1
+servers:
+  - url: http://localhost/api
+tags:
+  - name: Account
+    description: Everything about account identity
+  - name: City
+    description: Get city list
+paths:
+  /users:
+    post:
+      tags:
+        - Account
+      summary: Add account info with SR
+      description: Add account info with SR, on client we can type the data or simple scan QR!
+      operationId: addUser
+      requestBody:
+        description: Info from CIC
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      responses:
+        '200':
+          description: Register successful, response have ONE TIME DOWNLOAD key file use to login
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegisterSuccess'      
+        '405':
+          description: Invalid input
+  /users/login:
+    post:
+      tags:
+        - Account
+      summary: Add account info with SR
+      description: Add account info with SR, on client we can type the data or simple scan QR!
+      operationId: login
+      requestBody:
+        description: Info from CIC
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginSuccess'      
+        '405':
+          description: Invalid input
+  /city:
+    get:
+      tags:
+        - City
+      summary: Get city list
+      description: Get city list
+      operationId: getCity
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CityData'  
+        '405':
+          description: Invalid input
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        cccd:
+          type: string
+          example: 096212345678
+        name:
+          type: string
+          example: Le Van Dat
+        birthday:
+          type: string
+          example: '01/01/2002'
+        sex:
+          type: integer
+          example: 1
+        place_origin:
+          type: integer
+          format: int64
+          example: 10
+        place_residence:
+          type: integer
+          format: int64
+          example: 01
+        date:
+          type: string
+          example: "01/01/2018"
+    RegisterSuccess:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Register success! Please download file key with url in response and save it to safely location, then you never can download it again!"
+        key_file_url:
+          type: string
+          example: "/key-data/89416319074ed04263cb3661cce1be2d1cd5f23ee6c2a649969f24999f870c84/8f75296431b2f02140697f8799c9219025ab99c6063e2389b55d737be3da1132/key.json"
+    LoginSuccess:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Success! You have all permission to login this case"
+        access_token:
+          type: string
+          example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+    CityData:
+      type: object
+      properties:
+        01:
+          type: object
+          properties:
+            code:
+              type: string
+              example: "01"
+            name:
+              type: string
+              example: "Hà Nội"
+            type:
+              type: string
+              example: "thanh-pho"
+        02:
+          type: object
+          properties:
+            code:
+              type: string
+              example: "02"
+            name:
+              type: string
+              example: "Hà Giang"
+            type:
+              type: string
+              example: "tinh"

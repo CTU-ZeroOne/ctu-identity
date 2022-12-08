@@ -16,26 +16,16 @@
  * You should have received a copy of the GNU General Public License
  * along with CTU-Identity.  If not, see <http://www.gnu.org/licenses/>.
  */
+const express = require('express')
+const router = express.Router()
+const swaggerUi = require('swagger-ui-express')
+const YAML = require('yamljs')
+const swaggerDocument = YAML.load('./data/swagger.api.yaml')
 
-const express = require("express")
-const path = require("path")
-const logger = require("morgan")
-const bodyParser = require("body-parser")
-require('dotenv').config()
-const SERVER_PORT = process.env.SERVER_PORT || 3000
-const allRoute = require('./routes')
+const options = {
+    explorer: true,
+}
 
-const app = express()
+router.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options))
 
-app.use(logger("dev"))
-app.use(bodyParser.json()).use(bodyParser.urlencoded({ extended: false }))
-
-app.listen(SERVER_PORT, () => {
-	// Load all routes
-	allRoute(app)
-	console.clear()
-	console.log(`> Server listening on port ${SERVER_PORT}`)
-
-})
-
-module.exports = app
+module.exports = router

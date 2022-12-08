@@ -1,6 +1,6 @@
 {
-	"name": "server",
-	"version": "0.0.0",
+	"name": "ctu-identity-server",
+	"version": "0.0.1",
 	"private": true,
 	"scripts": {
 		"start": "node app dotenv_config_path=.env",
@@ -13,7 +13,9 @@
 		"express": "~4.16.1",
 		"keccak256": "^1.0.6",
 		"merkletreejs": "^0.3.9",
-		"morgan": "^1.10.0"
+		"morgan": "^1.10.0",
+		"swagger-ui-express": "^4.6.0",
+		"yamljs": "^0.3.0"
 	},
 	"devDependencies": {
 		"nodemon": "^2.0.20"
