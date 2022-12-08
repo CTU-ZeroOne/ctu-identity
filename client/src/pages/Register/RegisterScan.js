@@ -17,13 +17,11 @@
 
 import PropTypes from "prop-types";
 import QrScanner from "qr-scanner";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Divider, Input, Modal } from "tiny-ui";
 
 const RegisterScan = ({ visible, onCancel, onSuccess }) => {
 	const [frontFile, setFrontFile] = useState(null);
-
-	const dataRef = useRef({});
 
 	useEffect(() => {
 		if (frontFile) {
