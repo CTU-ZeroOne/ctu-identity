@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2022 lvdat
+ * Copyright (C) 2022 Le Van Dat
  * 
  * This file is part of CTU-Identity.
  * 
@@ -17,11 +17,8 @@
  * along with CTU-Identity.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-const express = require("express")
-const router = express.Router()
-const { signUpCheck } = require("../middleware")
-const { createUser } = require("../controllers/user.controller")
+const signUpCheck = require('./signUpCheck')
 
-router.post('/', signUpCheck.checkAll, createUser)
-
-module.exports = router
+module.exports = {
+    signUpCheck,
+}

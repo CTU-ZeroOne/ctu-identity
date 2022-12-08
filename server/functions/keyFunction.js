@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2022 lvdat
+ * Copyright (C) 2022 Le Van Dat
  * 
  * This file is part of CTU-Identity.
  * 
@@ -17,11 +17,25 @@
  * along with CTU-Identity.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-const express = require("express")
-const router = express.Router()
-const { signUpCheck } = require("../middleware")
-const { createUser } = require("../controllers/user.controller")
+ const { generateKeyPairSync } = require('crypto')
 
-router.post('/', signUpCheck.checkAll, createUser)
+createKey = () => {
+    const { publicKey, privateKey } = generateKeyPairSync('rsa', {
+        modulusLength: 1024,
+        publicKeyEncoding: {
+            type: 'spki',
+            format: 'pem'
+        },
+        privateKeyEncoding: {
+            type: 'pkcs8',
+            format: 'pem',
+        }
+    })
+    return { publicKey, privateKey}
+}
 
-module.exports = router
+createKey()
+
+module.exports = {
+    createKey,
+}
